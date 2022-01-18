@@ -29,20 +29,20 @@ function RelatedLinks({ intl }) {
   };
 
   return (
-    <section className="mb-4 x-small">
-      <h3 className="h4">{intl.formatMessage(messages.relatedLinks)}</h3>
+    <section className="mb-4">
+      <h3>{intl.formatMessage(messages.relatedLinks)}</h3>
       <ul className="pl-4">
         <li>
           <Hyperlink destination={`${getConfig().LMS_BASE_URL}/courses/${courseId}/dates`} onClick={() => logLinkClicked('dates')}>
             {intl.formatMessage(messages.datesCardLink)}
           </Hyperlink>
-          <p>{intl.formatMessage(messages.datesCardDescription)}</p>
+          <p className="mb-2">{intl.formatMessage(messages.datesCardDescription)}</p>
         </li>
         <li>
           <Hyperlink destination={`${getConfig().LMS_BASE_URL}/courses/${courseId}/course`} onClick={() => logLinkClicked('course_outline')}>
             {intl.formatMessage(messages.outlineCardLink)}
           </Hyperlink>
-          <p>{intl.formatMessage(messages.outlineCardDescription)}</p>
+          <p className="mb-2">{intl.formatMessage(messages.outlineCardDescription)}</p>
         </li>
       </ul>
     </section>

@@ -27,7 +27,7 @@ function PassingGradeTooltip({ intl, passingGrade, tooltipClassName }) {
       </OverlayTrigger>
 
       <text
-        className="x-small"
+        className="small"
         textAnchor={passingGrade < 50 ? 'start' : 'end'}
         x={`${passingGrade}%`}
         y="90px"

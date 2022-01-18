@@ -1,17 +1,26 @@
+$bar-height: 6px;
+
 .grade-bar {
-  rect {
-    height: 6px;
-  }
+  .grade-bar__container {
+    -moz-transform: translateY(calc(50% - #{$bar-height / 2}));
+    -ms-transform: translateY(calc(50% - #{$bar-height / 2}));
+    -webkit-transform: translateY(calc(50% - #{$bar-height / 2}));
+    transform: translateY(calc(50% - #{$bar-height / 2}));
 
-  .grade-bar__base {
-    fill: $light-300;
+    rect {
+      height: $bar-height;
+    }
+  
+    .grade-bar__base {
+      fill: $light-300;
+    }
+  
+    .grade-bar__divider {
+      fill: $primary-500;
+      width: 1px;
+    }
   }
-
-  .grade-bar__divider {
-    fill: $primary-500;
-    width: 1px;
-  }
-
+  
   .grade-bar--passing {
     fill: $primary-500;
   }
@@ -45,8 +54,8 @@
 
 #non-passing-grade-tooltip {
   .arrow::after {
-    border-top-color: $accent-b;
+    border-top-color: $warning-500;
   }
 
-  background: $accent-b;
+  background: $warning-500;
 }

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { layoutGenerator } from 'react-break';
 
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
-import { CheckCircle, WarningFilled } from '@edx/paragon/icons';
+import { CheckCircle, Warning } from '@edx/paragon/icons';
 import { Icon } from '@edx/paragon';
 import { useModel } from '../../../../generic/model-store';
 
@@ -57,17 +57,17 @@ function CourseGradeFooter({ intl, passingGrade }) {
     }
   }
 
-  const icon = isPassing ? <Icon src={CheckCircle} className="text-success-300 d-inline-flex align-bottom" />
-    : <Icon src={WarningFilled} className="d-inline-flex align-bottom" />;
+  const icon = isPassing ? <Icon src={CheckCircle} className="d-inline-flex align-bottom" />
+    : <Icon src={Warning} className="d-inline-flex align-bottom" />;
 
   return (
-    <div className={`row w-100 m-0 px-4 py-3 py-md-4 rounded-bottom ${isPassing ? 'bg-success-100' : 'bg-warning-100'}`}>
+    <div className={`row w-100 m-0 px-3 py-2 py-md-3 rounded-bottom ${isPassing ? 'text-success bg-success-100' : 'text-warning bg-warning-100'}`}>
       <div className="col-auto p-0">
         {icon}
       </div>
-      <div className="col-11 pl-2 px-0">
+      <div className="col-11 pr-0 pl-3">
         <OnMobile>
-          <span className="h5 align-bottom">
+          <span className="align-bottom">
             {footerText}
             {hasLetterGrades && (
               <span style={{ whiteSpace: 'nowrap' }}>
@@ -78,7 +78,7 @@ function CourseGradeFooter({ intl, passingGrade }) {
           </span>
         </OnMobile>
         <OnAtLeastTablet>
-          <span className="h4 m-0 align-bottom">
+          <span className="m-0 align-bottom">
             {footerText}
             {hasLetterGrades && (
               <span style={{ whiteSpace: 'nowrap' }}>

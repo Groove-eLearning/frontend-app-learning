@@ -50,7 +50,7 @@ function DetailedGrades({ intl }) {
 
   return (
     <section className="text-dark-700">
-      <h3 className="h4 mb-3">{intl.formatMessage(messages.detailedGrades)}</h3>
+      <h2 className="mb-3">{intl.formatMessage(messages.detailedGrades)}</h2>
       {gradesFeatureIsPartiallyLocked && (
         <div className="mb-3 small ml-0 d-inline">
           <Icon className="mr-1 mt-1 d-inline-flex" style={{ height: '1rem', width: '1rem' }} src={Blocked} data-testid="blocked-icon" />
@@ -61,9 +61,9 @@ function DetailedGrades({ intl }) {
         <DetailedGradesTable />
       )}
       {!hasSectionScores && (
-        <p className="small">{intl.formatMessage(messages.detailedGradesEmpty)}</p>
+        <p>{intl.formatMessage(messages.detailedGradesEmpty)}</p>
       )}
-      <p className="x-small m-0">
+      <p className="m-0">
         <FormattedMessage
           id="progress.ungradedAlert"
           defaultMessage="For progress on ungraded aspects of the course, view your {outlineLink}."

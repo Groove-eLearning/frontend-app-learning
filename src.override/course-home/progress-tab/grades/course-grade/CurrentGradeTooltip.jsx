@@ -30,7 +30,7 @@ function CurrentGradeTooltip({ intl, tooltipClassName }) {
         placement="top"
         overlay={(
           <Popover id={`${isPassing ? 'passing' : 'non-passing'}-grade-tooltip`} aria-hidden="true" className={tooltipClassName}>
-            <Popover.Content data-testid="currentGradeTooltipContent" className={isPassing ? 'text-white' : 'text-dark-700'}>
+            <Popover.Content data-testid="currentGradeTooltipContent" className="text-white">
               {currentGrade.toFixed(0)}%
             </Popover.Content>
           </Popover>
@@ -42,7 +42,7 @@ function CurrentGradeTooltip({ intl, tooltipClassName }) {
         </g>
       </OverlayTrigger>
       <text
-        className="x-small"
+        className="small"
         textAnchor={currentGrade < 50 ? 'start' : 'end'}
         x={`${Math.min(...[currentGrade, 100])}%`}
         y="20px"

@@ -11,7 +11,7 @@
     "ie 11"
   ],
   "scripts": {
-    "build": "fedx-scripts webpack",
+    "build": "yarn merge && fedx-scripts webpack",
     "i18n_extract": "BABEL_ENV=i18n fedx-scripts babel src --quiet > /dev/null",
     "is-es5": "es-check es5 ./dist/*.js",
     "lint": "fedx-scripts eslint --ext .js --ext .jsx .",
@@ -19,7 +19,8 @@
     "prepare": "husky install",
     "snapshot": "fedx-scripts jest --updateSnapshot",
     "start": "fedx-scripts webpack-dev-server --progress",
-    "test": "fedx-scripts jest --coverage --passWithNoTests"
+    "test": "fedx-scripts jest --coverage --passWithNoTests",
+    "merge": "merge-dirs src.override src --overwrite"
   },
   "author": "edX",
   "license": "AGPL-3.0",
@@ -49,6 +50,7 @@
     "core-js": "3.18.3",
     "js-cookie": "3.0.1",
     "lodash.camelcase": "4.3.0",
+    "merge-dirs": "0.2.1",
     "prop-types": "15.7.2",
     "react": "17.0.2",
     "react-break": "1.3.2",

@@ -51,7 +51,7 @@ function SubsectionTitleCell({ intl, subsection }) {
           <Collapsible.Visible whenClosed><Icon src={ArrowDropDown} /></Collapsible.Visible>
           <Collapsible.Visible whenOpen><Icon src={ArrowDropUp} /></Collapsible.Visible>
         </Collapsible.Trigger>
-        <span className="small d-inline ml-4 pl-1">
+        <span className="d-inline ml-4 pl-1">
           {gradesFeatureIsFullyLocked || subsection.learnerHasAccess ? ''
             : (
               <Icon
@@ -66,7 +66,7 @@ function SubsectionTitleCell({ intl, subsection }) {
           {url ? (
             <a
               href={url}
-              className="muted-link small"
+              className="muted-link"
               onClick={logSubsectionClicked}
               tabIndex={gradesFeatureIsFullyLocked ? '-1' : '0'}
               aria-labelledby={`detailedGradesBlockedIcon${subsection.blockKey}`}
@@ -74,7 +74,7 @@ function SubsectionTitleCell({ intl, subsection }) {
               {displayName}
             </a>
           ) : (
-            <span className="greyed-out small">{displayName}</span>
+            <span className="greyed-out">{displayName}</span>
           )}
         </span>
       </Row>

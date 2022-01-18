@@ -104,7 +104,7 @@ function GradeSummaryTable({ intl, setAllOfSomeAssignmentTypeIsLocked }) {
             Cell: ({ value }) => (
               <span className={value.locked ? 'greyed-out' : ''}>{value.weight}</span> // eslint-disable-line react/prop-types
             ),
-            cellClassName: 'text-right small',
+            cellClassName: 'text-right',
           },
           {
             Header: `${intl.formatMessage(messages.grade)}`,
@@ -114,7 +114,7 @@ function GradeSummaryTable({ intl, setAllOfSomeAssignmentTypeIsLocked }) {
             Cell: ({ value }) => (
               <span className={value.locked ? 'greyed-out' : ''}>{value.grade}</span> // eslint-disable-line react/prop-types
             ),
-            cellClassName: 'text-right small',
+            cellClassName: 'text-right',
           },
           {
             Header: `${intl.formatMessage(messages.weightedGrade)}`,
@@ -124,12 +124,14 @@ function GradeSummaryTable({ intl, setAllOfSomeAssignmentTypeIsLocked }) {
             Cell: ({ value }) => (
               <span className={value.locked ? 'greyed-out' : ''}>{value.weightedGrade}</span> // eslint-disable-line react/prop-types
             ),
-            cellClassName: 'text-right font-weight-bold small',
+            cellClassName: 'text-right font-weight-bold',
           },
         ]}
       >
         <DataTable.Table />
-        <GradeSummaryTableFooter />
+        <div className="mt-2">
+          <GradeSummaryTableFooter />
+        </div>
       </DataTable>
 
       {footnotes && (
