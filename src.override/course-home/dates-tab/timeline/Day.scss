@@ -1,0 +1,17 @@
+$dot-radius: 0.3rem;
+$dot-size: $dot-radius * 3;
+$offset: $dot-radius;
+
+.dates-line-and-dot {
+
+
+  .dates-line-top {
+    height: $offset;
+  }
+  
+  .dates-dot {
+    border-radius: 50%;
+    height: $dot-size;
+    width: $dot-size;
+  }
+}
