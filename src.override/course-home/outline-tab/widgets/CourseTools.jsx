@@ -59,10 +59,10 @@ function CourseTools({ courseId, intl }) {
 
   return (
     <section className="mb-4">
-      <h2 className="h4">{intl.formatMessage(messages.tools)}</h2>
+      <h3 className="mb-3">{intl.formatMessage(messages.tools)}</h3>
       <ul className="list-unstyled">
         {courseTools.map((courseTool) => (
-          <li key={courseTool.analyticsId} className="small">
+          <li key={courseTool.analyticsId}>
             <a href={courseTool.url} onClick={() => logClick(courseTool.analyticsId)}>
               <FontAwesomeIcon icon={renderIcon(courseTool.analyticsId)} className="mr-2" fixedWidth />
               {courseTool.title}

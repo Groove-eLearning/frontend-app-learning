@@ -37,43 +37,44 @@ function getBadgeListAndColor(date, intl, item, items) {
     {
       message: messages.today,
       shownForDay: isToday,
-      bg: 'bg-warning-300',
-      className: 'text-black',
+      badgeClassName: 'bg-warning-100 border-warning-500 text-warning',
+      dotClassName: 'bg-warning-300 border-warning-500'
     },
     {
       message: messages.completed,
       shownForDay: assignments.length && assignments.every(isComplete),
       shownForItem: x => isLearnerAssignment(x) && isComplete(x),
-      bg: 'bg-light-500',
-      className: 'text-black',
+      badgeClassName: 'bg-light-500 border-dark-300 text-dark',
+      dotClassName: 'bg-light-500 border-dark-300'
     },
     {
       message: messages.pastDue,
       shownForDay: assignments.length && assignments.every(isPastDue),
       shownForItem: x => isLearnerAssignment(x) && isPastDue(x),
-      bg: 'bg-dark-200',
-      className: 'text-white',
+      badgeClassName: 'bg-dark-200 border-dark-300 text-white',
+      dotClassName: 'bg-dark-200 border-dark-300'
     },
     {
       message: messages.dueNext,
       shownForDay: !isToday && assignments.some(x => x.dueNext),
       shownForItem: x => x.dueNext,
-      bg: 'bg-gray-500',
-      className: 'text-white',
+      badgeClassName: 'bg-gray-500 border-dark-500 text-white',
+      dotClassName: 'bg-gray-500 border-dark-500'
     },
     {
       message: messages.unreleased,
       shownForDay: assignments.length && assignments.every(isUnreleased),
       shownForItem: x => isLearnerAssignment(x) && isUnreleased(x),
-      className: 'border border-gray-500 text-gray-500',
+      badgeClassName: 'border-gray-500 border-dark-500 text-gray-500',
+      dotClassName: 'bg-gray-500 border-dark-500'
     },
     {
       message: messages.verifiedOnly,
       shownForDay: items.length && items.every(x => !hasAccess(x)),
       shownForItem: x => !hasAccess(x),
       icon: faLock,
-      bg: 'bg-dark-700',
-      className: 'text-white',
+      badgeClassName: 'bg-dark-700 border-dark-700 text-white',
+      dotClassName: 'bg-dark-700 border-dark-700'
     },
   ];
   let color = null; // first color of any badge
@@ -93,10 +94,10 @@ function getBadgeListAndColor(date, intl, item, items) {
         }
 
         if (!color && !isInFuture) {
-          color = b.bg;
+          color = b.dotClassName;
         }
         return (
-          <Badge key={b.message.id} className={classNames('ml-2', b.bg, b.className)} data-testid="dates-badge">
+          <Badge key={b.message.id} className={classNames('ml-3', b.badgeClassName)} data-testid="dates-badge">
             {b.icon && <FontAwesomeIcon icon={b.icon} className="mr-1" />}
             {intl.formatMessage(b.message)}
           </Badge>
@@ -105,7 +106,7 @@ function getBadgeListAndColor(date, intl, item, items) {
     </>
   );
   if (!color && isInFuture) {
-    color = 'bg-gray-900';
+    color = 'bg-white border-dark-300';
   }
 
   return {

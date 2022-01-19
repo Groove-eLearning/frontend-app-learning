@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useModel } from '../../generic/model-store';
 import { isLearnerAssignment } from '../dates-tab/utils';
-import './DateSummary.scss';
 
 export default function DateSummary({
   dateBlock,
@@ -40,60 +39,62 @@ export default function DateSummary({
   };
 
   return (
-    <li className="container p-0 mb-3 small text-dark-500">
-      <div className="row">
-        <FontAwesomeIcon icon={faCalendarAlt} className="ml-3 mt-1 mr-1" fixedWidth />
-        <div className="ml-1 font-weight-bold">
-          <FormattedDate
-            /** [MM-P2P] Experiment */
-            value={showMMP2P ? mmp2p.state.upgradeDeadline : dateBlock.date}
-            day="numeric"
-            month="short"
-            weekday="short"
-            year="numeric"
-            {...timezoneFormatArgs}
-          />
+    <li className="container p-0 mb-3 text-dark-500">
+      <div className="d-flex">
+        <FontAwesomeIcon icon={faCalendarAlt} className="ml-3 mr-1" fixedWidth />
+        <div className="ml-1">
+          <div className="font-weight-bold">
+            <FormattedDate
+              /** [MM-P2P] Experiment */
+              value={showMMP2P ? mmp2p.state.upgradeDeadline : dateBlock.date}
+              day="numeric"
+              month="short"
+              weekday="short"
+              year="numeric"
+              {...timezoneFormatArgs}
+            />
+          </div>
+          {/** [MM-P2P] Experiment (conditional) */}
+          { showMMP2P ? (
+            <div>
+              <div className="date-summary-text">
+                <div className="font-weight-bold mt-2">
+                  Last chance to upgrade
+                </div>
+              </div>
+              <div className="date-summary-text mt-1">
+                You are still eligible to upgrade to a Verified Certificate!
+                &nbsp; Unlock full course access and highlight the knowledge you&apos;ll gain.
+              </div>
+            </div>
+          ) : (
+            <div>
+              <div className="date-summary-text">
+                {linkedTitle && (
+                  <div className="font-weight-bold mt-2">
+                    <a href={dateBlock.link}>{dateBlock.title}</a>
+                  </div>
+                )}
+                {!linkedTitle && (
+                  <div className="font-weight-bold mt-2">{dateBlock.title}</div>
+                )}
+              </div>
+              {dateBlock.description && (
+                <div className="date-summary-text mt-1">{dateBlock.description}</div>
+              )}
+              {!linkedTitle && dateBlock.link && (
+                <a
+                  href={dateBlock.link}
+                  onClick={dateBlock.dateType === 'verified-upgrade-deadline' ? logVerifiedUpgradeClick : () => {}}
+                  className="description-link"
+                >
+                  {dateBlock.linkText}
+                </a>
+              )}
+            </div>
+          )}
         </div>
       </div>
-      {/** [MM-P2P] Experiment (conditional) */}
-      { showMMP2P ? (
-        <div className="row ml-4 pr-2">
-          <div className="date-summary-text">
-            <div className="font-weight-bold mt-2">
-              Last chance to upgrade
-            </div>
-          </div>
-          <div className="date-summary-text mt-1">
-            You are still eligible to upgrade to a Verified Certificate!
-            &nbsp; Unlock full course access and highlight the knowledge you&apos;ll gain.
-          </div>
-        </div>
-      ) : (
-        <div className="row ml-4 pr-2">
-          <div className="date-summary-text">
-            {linkedTitle && (
-              <div className="font-weight-bold mt-2">
-                <a href={dateBlock.link}>{dateBlock.title}</a>
-              </div>
-            )}
-            {!linkedTitle && (
-              <div className="font-weight-bold mt-2">{dateBlock.title}</div>
-            )}
-          </div>
-          {dateBlock.description && (
-            <div className="date-summary-text mt-1">{dateBlock.description}</div>
-          )}
-          {!linkedTitle && dateBlock.link && (
-            <a
-              href={dateBlock.link}
-              onClick={dateBlock.dateType === 'verified-upgrade-deadline' ? logVerifiedUpgradeClick : () => {}}
-              className="description-link"
-            >
-              {dateBlock.linkText}
-            </a>
-          )}
-        </div>
-      )}
     </li>
   );
 }

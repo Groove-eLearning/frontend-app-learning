@@ -43,82 +43,85 @@ function Day({
     && items.some((item) => item.dateType === 'verified-upgrade-deadline')
   );
   return (
-    <li className="dates-day pb-4" data-testid="dates-day">
-      {/* Top Line */}
-      {!first && <div className="dates-line-top border-1 border-left border-gray-900 bg-gray-900" />}
+    <li className="dates-day" data-testid="dates-day">
+      <div className="d-flex">
+        <div className="dates-line-and-dot d-flex flex-column align-items-center pr-3">
+          {/* Top Line */}
+          <div className={`dates-line-top ${first ? '' : 'border-1 border-left border-dark-300'}`} />
 
-      {/* Dot */}
-      <div className={classNames(color, 'dates-dot border border-gray-900')} />
+          {/* Dot */}
+          <div className={classNames(color, 'dates-dot border')} />
 
-      {/* Bottom Line */}
-      {!last && <div className="dates-line-bottom border-1 border-left border-gray-900 bg-gray-900" />}
-
-      {/* Content */}
-      <div className="d-inline-block ml-3 pl-2">
-        <div className="row w-100 m-0 mb-1 align-items-center text-primary-700" data-testid="dates-header">
-          <FormattedDate
-            /** [MM-P2P] Experiment */
-            value={mmp2pOverride ? mmp2p.state.upgradeDeadline : date}
-            day="numeric"
-            month="short"
-            weekday="short"
-            year="numeric"
-            {...timezoneFormatArgs}
-          />
-          {badges}
+          {/* Bottom Line */}
+          {!last && <div className="dates-line-bottom border-1 border-left border-dark-300 flex-grow-1" />}
         </div>
-        {items.map((item) => {
-          /** [MM-P2P] Experiment (conditional) */
-          const { badges: itemBadges } = mmp2pOverride
-            ? getBadgeListAndColor(new Date(mmp2p.state.upgradeDeadline), intl, item, items)
-            : getBadgeListAndColor(date, intl, item, items);
+        {/* Content */}
+        <div className="pb-4">
+          <div className="row w-100 m-0 align-items-center font-weight-bold" data-testid="dates-header">
+            <FormattedDate
+              /** [MM-P2P] Experiment */
+              value={mmp2pOverride ? mmp2p.state.upgradeDeadline : date}
+              day="numeric"
+              month="short"
+              weekday="short"
+              year="numeric"
+              {...timezoneFormatArgs}
+            />
+            {badges}
+          </div>
+          {items.map((item) => {
+            /** [MM-P2P] Experiment (conditional) */
+            const { badges: itemBadges } = mmp2pOverride
+              ? getBadgeListAndColor(new Date(mmp2p.state.upgradeDeadline), intl, item, items)
+              : getBadgeListAndColor(date, intl, item, items);
 
-          const showDueDateTime = item.dateType === 'assignment-due-date';
-          const showLink = item.link && isLearnerAssignment(item);
-          const title = showLink ? (<u><a href={item.link} className="text-reset">{item.title}</a></u>) : item.title;
-          const available = item.learnerHasAccess && (item.link || !isLearnerAssignment(item));
-          const textColor = available ? 'text-primary-700' : 'text-gray-500';
+            const showDueDateTime = item.dateType === 'assignment-due-date';
+            const showLink = item.link && isLearnerAssignment(item);
+            const title = showLink ? (<u><a href={item.link} className="text-reset">{item.title}</a></u>) : item.title;
+            const available = item.learnerHasAccess && (item.link || !isLearnerAssignment(item));
+            // const textColor = available ? 'text-primary-700' : 'text-gray-500';
 
-          return (
-            <div key={item.title + item.date} className={classNames(textColor, 'small pb-1')} data-testid="dates-item">
-              <div>
-                <span className="small">
-                  <span className="font-weight-bold">{item.assignmentType && `${item.assignmentType}: `}{title}</span>
-                  {showDueDateTime && (
-                    <span>
-                      <span className="mx-1">due</span>
-                      <FormattedTime
-                        value={date}
-                        timeZoneName="short"
-                        {...timezoneFormatArgs}
-                      />
-                    </span>
+            return (
+              <div key={item.title + item.date} className={classNames('pb-1')} data-testid="dates-item">
+                <div>
+                  <span>
+                    <span>{item.assignmentType && `${item.assignmentType}: `}{title}</span>
+                    {showDueDateTime && (
+                      <span>
+                        <span className="mx-1">due</span>
+                        <FormattedTime
+                          value={date}
+                          timeZoneName="short"
+                          {...timezoneFormatArgs}
+                        />
+                      </span>
+                    )}
+                  </span>
+                  {itemBadges}
+                  {item.extraInfo && (
+                    <OverlayTrigger
+                      placement="bottom"
+                      overlay={
+                        <Tooltip>{item.extraInfo}</Tooltip>
+                      }
+                    >
+                      <FontAwesomeIcon icon={faInfoCircle} className="fa-xs ml-1 text-gray-700" data-testid="dates-extra-info" />
+                    </OverlayTrigger>
                   )}
-                </span>
-                {itemBadges}
-                {item.extraInfo && (
-                  <OverlayTrigger
-                    placement="bottom"
-                    overlay={
-                      <Tooltip>{item.extraInfo}</Tooltip>
-                    }
-                  >
-                    <FontAwesomeIcon icon={faInfoCircle} className="fa-xs ml-1 text-gray-700" data-testid="dates-extra-info" />
-                  </OverlayTrigger>
-                )}
+                </div>
+                { /** [MM-P2P] Experiment (conditional) */ }
+                { mmp2pOverride
+                  ? (
+                    <div className="small mb-2">
+                      You are still eligible to upgrade to a Verified Certificate!
+                      &nbsp; Unlock full course access and highlight the knowledge you&apos;ll gain.
+                    </div>
+                  )
+                  : (item.description && <div className="small mb-2">{item.description}</div>)}
               </div>
-              { /** [MM-P2P] Experiment (conditional) */ }
-              { mmp2pOverride
-                ? (
-                  <div className="small mb-2">
-                    You are still eligible to upgrade to a Verified Certificate!
-                    &nbsp; Unlock full course access and highlight the knowledge you&apos;ll gain.
-                  </div>
-                )
-                : (item.description && <div className="small mb-2">{item.description}</div>)}
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </li>
   );

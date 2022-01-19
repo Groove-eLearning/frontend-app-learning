@@ -18,7 +18,7 @@ function CourseHandouts({ courseId, intl }) {
 
   return (
     <section className="mb-4">
-      <h2 className="h4">{intl.formatMessage(messages.handouts)}</h2>
+      <h3 className="mb-3">{intl.formatMessage(messages.handouts)}</h3>
       <LmsHtmlFragment
         className="small"
         html={handoutsHtml}

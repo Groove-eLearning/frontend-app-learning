@@ -40,13 +40,17 @@ function TabPage({ intl, ...props }) {
 
   if (courseStatus === 'loading') {
     return (
-      <>
+      <div className="d-flex flex-column vh-100">
         <Header />
-        <PageLoading
-          srMessage={intl.formatMessage(messages.loading)}
-        />
-        <Footer />
-      </>
+        <div className="overflow-auto flex-grow-1 d-flex flex-column h-0">
+          <div className="flex-grow-1">
+            <PageLoading
+              srMessage={intl.formatMessage(messages.loading)}
+            />
+          </div>
+          <Footer />
+        </div>
+      </div>
     );
   }
 
@@ -61,7 +65,7 @@ function TabPage({ intl, ...props }) {
   // like the outline tab handling unenrolled learners)
   if (courseStatus === 'loaded' || courseStatus === 'denied') {
     return (
-      <>
+      <div className="d-flex flex-column vh-100">
         <Toast
           action={toastBodyText ? {
             label: toastBodyText,
@@ -78,21 +82,29 @@ function TabPage({ intl, ...props }) {
           courseNumber={number}
           courseTitle={title}
         />
-        <LoadedTabPage {...props} />
-        <Footer />
-      </>
+        <div className="overflow-auto flex-grow-1 d-flex flex-column h-0">
+          <div className="flex-grow-1">
+            <LoadedTabPage {...props} />
+          </div>
+          <Footer />
+        </div>
+      </div>
     );
   }
 
   // courseStatus 'failed' and any other unexpected course status.
   return (
-    <>
+    <div className="d-flex flex-column vh-100">
       <Header />
-      <p className="text-center py-5 mx-auto" style={{ maxWidth: '30em' }}>
-        {intl.formatMessage(messages.failure)}
-      </p>
-      <Footer />
-    </>
+      <div className="overflow-auto flex-grow-1 d-flex flex-column h-0">
+        <div className="flex-grow-1">
+          <p className="text-center py-5 mx-auto" style={{ maxWidth: '30em' }}>
+            {intl.formatMessage(messages.failure)}
+          </p>
+        </div>
+        <Footer />
+      </div>
+    </div>
   );
 }
 

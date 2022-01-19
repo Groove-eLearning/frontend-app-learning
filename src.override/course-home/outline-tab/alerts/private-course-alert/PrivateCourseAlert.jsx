@@ -64,10 +64,10 @@ function PrivateCourseAlert({ intl, payload }) {
   );
 
   return (
-    <Alert variant="light" data-testid="private-course-alert">
+    <Alert variant="dark" data-testid="private-course-alert">
       {anonymousUser && (
         <>
-          <p className="font-weight-bold">
+          <p className="font-weight-bold mb-1">
             {intl.formatMessage(enrollmentMessages.alert)}
           </p>
           <FormattedMessage

@@ -30,7 +30,7 @@ function RelatedLinks({ intl }) {
 
   return (
     <section className="mb-4">
-      <h3>{intl.formatMessage(messages.relatedLinks)}</h3>
+      <h3 className="mb-3">{intl.formatMessage(messages.relatedLinks)}</h3>
       <ul className="pl-4">
         <li>
           <Hyperlink destination={`${getConfig().LMS_BASE_URL}/courses/${courseId}/dates`} onClick={() => logLinkClicked('dates')}>

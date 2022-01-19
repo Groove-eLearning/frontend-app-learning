@@ -18,18 +18,13 @@ export default class PageLoading extends Component {
 
   render() {
     return (
-      <div>
         <div
-          className="d-flex justify-content-center align-items-center flex-column"
-          style={{
-            height: '50vh',
-          }}
+          className="d-flex justify-content-center align-items-center flex-column h-100"
         >
           <Spinner animation="border" variant="primary" role="status">
             {this.renderSrMessage()}
           </Spinner>
         </div>
-      </div>
     );
   }
 }

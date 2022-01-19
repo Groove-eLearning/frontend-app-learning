@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Alert as ParagonAlert } from '@edx/paragon';
-import { CheckCircle, Info, WarningFilled } from '@edx/paragon/icons';
+import { CheckCircle, Info, Warning } from '@edx/paragon/icons';
 
 import { ALERT_TYPES } from './UserMessagesProvider';
 
@@ -21,7 +21,7 @@ function getAlertVariant(type) {
 function getAlertIcon(type) {
   switch (type) {
     case ALERT_TYPES.ERROR:
-      return WarningFilled;
+      return Warning;
     case ALERT_TYPES.SUCCESS:
       return CheckCircle;
     default:

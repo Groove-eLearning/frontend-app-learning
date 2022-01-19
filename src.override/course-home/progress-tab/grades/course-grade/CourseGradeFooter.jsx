@@ -61,7 +61,7 @@ function CourseGradeFooter({ intl, passingGrade }) {
     : <Icon src={Warning} className="d-inline-flex align-bottom" />;
 
   return (
-    <div className={`row w-100 m-0 px-3 py-2 py-md-3 rounded-bottom ${isPassing ? 'text-success bg-success-100' : 'text-warning bg-warning-100'}`}>
+    <div className={`row w-100 m-0 px-3 py-2 py-md-3 rounded border ${isPassing ? 'text-success bg-success-100 border-success-500' : 'text-warning bg-warning-100 border-warning-500'}`}>
       <div className="col-auto p-0">
         {icon}
       </div>

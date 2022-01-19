@@ -129,7 +129,7 @@ function GradeSummaryTable({ intl, setAllOfSomeAssignmentTypeIsLocked }) {
         ]}
       >
         <DataTable.Table />
-        <div className="mt-2">
+        <div className="mt-3">
           <GradeSummaryTableFooter />
         </div>
       </DataTable>
